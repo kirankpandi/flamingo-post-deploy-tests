@@ -1,0 +1,379 @@
+{
+  "id": "00000010",
+  "model": {
+    "name": "%switch_plan_name%",
+    "views": [
+      {
+        "from": {
+          "name": "%dataset_id%",
+          "alias": "%dataset_id%",
+          "type": "TABLE"
+        },
+        "name": "%switch_plan_name%",
+        "attrs": [
+          {
+            "formula": {
+              "source": "[O_ORDERKEY]",
+              "type": {
+                "name": "INTEGER"
+              }
+            },
+            "name": "O_ORDERKEY",
+            "role": "MEASURE",
+            "type": "CONTINUOUS",
+            "scale": "QUANTITATIVE",
+            "order": {
+              "type": "SEQUENTIAL"
+            },
+            "source": "COLUMN",
+            "defaults": {
+              "frame": {
+                "address": "DOWN",
+                "type": "TABLE"
+              },
+              "aggregate": "SUM"
+            }
+          },
+          {
+            "formula": {
+              "source": "[O_CUSTKEY]",
+              "type": {
+                "name": "INTEGER"
+              }
+            },
+            "name": "O_CUSTKEY",
+            "role": "MEASURE",
+            "type": "CONTINUOUS",
+            "scale": "QUANTITATIVE",
+            "order": {
+              "type": "SEQUENTIAL"
+            },
+            "source": "COLUMN",
+            "defaults": {
+              "frame": {
+                "address": "DOWN",
+                "type": "TABLE"
+              },
+              "aggregate": "SUM"
+            }
+          },
+          {
+            "formula": {
+              "source": "[O_ORDERSTATUS]",
+              "type": {
+                "name": "STRING"
+              }
+            },
+            "name": "O_ORDERSTATUS",
+            "role": "DIMENSION",
+            "type": "DISCRETE",
+            "scale": "CATEGORICAL",
+            "source": "COLUMN",
+            "defaults": {
+              "frame": {
+                "address": "DOWN",
+                "type": "TABLE"
+              },
+              "aggregate": "COUNT"
+            }
+          },
+          {
+            "formula": {
+              "source": "[O_TOTALPRICE]",
+              "type": {
+                "name": "FLOAT"
+              }
+            },
+            "name": "O_TOTALPRICE",
+            "role": "MEASURE",
+            "type": "CONTINUOUS",
+            "scale": "QUANTITATIVE",
+            "order": {
+              "type": "SEQUENTIAL"
+            },
+            "source": "COLUMN",
+            "defaults": {
+              "frame": {
+                "address": "DOWN",
+                "type": "TABLE"
+              },
+              "aggregate": "SUM"
+            }
+          },
+          {
+            "formula": {
+              "source": "[O_ORDERDATE]",
+              "type": {
+                "unit": "MICROS",
+                "name": "TIMESTAMP"
+              }
+            },
+            "name": "O_ORDERDATE",
+            "role": "DIMENSION",
+            "type": "DISCRETE",
+            "scale": "ORDINAL",
+            "order": {
+              "type": "SEQUENTIAL"
+            },
+            "source": "COLUMN",
+            "defaults": {
+              "frame": {
+                "address": "DOWN",
+                "type": "TABLE"
+              },
+              "aggregate": "COUNT"
+            }
+          },
+          {
+            "formula": {
+              "source": "[O_ORDERPRIORITY]",
+              "type": {
+                "name": "STRING"
+              }
+            },
+            "name": "O_ORDERPRIORITY",
+            "role": "DIMENSION",
+            "type": "DISCRETE",
+            "scale": "CATEGORICAL",
+            "source": "COLUMN",
+            "defaults": {
+              "frame": {
+                "address": "DOWN",
+                "type": "TABLE"
+              },
+              "aggregate": "COUNT"
+            }
+          },
+          {
+            "formula": {
+              "source": "[O_CLERK]",
+              "type": {
+                "name": "STRING"
+              }
+            },
+            "name": "O_CLERK",
+            "role": "DIMENSION",
+            "type": "DISCRETE",
+            "scale": "CATEGORICAL",
+            "source": "COLUMN",
+            "defaults": {
+              "frame": {
+                "address": "DOWN",
+                "type": "TABLE"
+              },
+              "aggregate": "COUNT"
+            }
+          },
+          {
+            "formula": {
+              "source": "[O_SHIPPRIORITY]",
+              "type": {
+                "name": "INTEGER"
+              }
+            },
+            "name": "O_SHIPPRIORITY",
+            "role": "MEASURE",
+            "type": "CONTINUOUS",
+            "scale": "QUANTITATIVE",
+            "order": {
+              "type": "SEQUENTIAL"
+            },
+            "source": "COLUMN",
+            "defaults": {
+              "frame": {
+                "address": "DOWN",
+                "type": "TABLE"
+              },
+              "aggregate": "SUM"
+            }
+          },
+          {
+            "formula": {
+              "source": "[O_COMMENT]",
+              "type": {
+                "name": "STRING"
+              }
+            },
+            "name": "O_COMMENT",
+            "role": "DIMENSION",
+            "type": "DISCRETE",
+            "scale": "CATEGORICAL",
+            "source": "COLUMN",
+            "defaults": {
+              "frame": {
+                "address": "DOWN",
+                "type": "TABLE"
+              },
+              "aggregate": "COUNT"
+            }
+          }
+        ]
+      }
+    ],
+    "params": []
+  },
+  "viewName": "%switch_plan_name%",
+  "queries": [
+    {
+      "name": "count",
+      "marks": [
+        {
+          "formula": {
+            "source": "SUM(1)",
+            "type": {
+              "name": "INTEGER"
+            }
+          },
+          "name": "AGG(SUM(1))",
+          "role": "MEASURE",
+          "type": "CONTINUOUS",
+          "scale": "QUANTITATIVE",
+          "order": {
+            "type": "SEQUENTIAL"
+          },
+          "source": "FIELD",
+          "alias": "count"
+        }
+      ],
+      "id": "00000011",
+      "type": "PIVOT"
+    },
+    {
+      "id": "00000012",
+      "name": "records",
+      "fields": [
+        {
+          "formula": {
+            "source": "[O_ORDERKEY]",
+            "type": {
+              "name": "INTEGER"
+            }
+          },
+          "name": "O_ORDERKEY",
+          "role": "DIMENSION",
+          "type": "DISCRETE",
+          "scale": "CATEGORICAL",
+          "source": "FIELD",
+          "alias": "O_ORDERKEY"
+        },
+        {
+          "formula": {
+            "source": "[O_CUSTKEY]",
+            "type": {
+              "name": "INTEGER"
+            }
+          },
+          "name": "O_CUSTKEY",
+          "role": "DIMENSION",
+          "type": "DISCRETE",
+          "scale": "CATEGORICAL",
+          "source": "FIELD",
+          "alias": "O_CUSTKEY"
+        },
+        {
+          "formula": {
+            "source": "[O_ORDERSTATUS]",
+            "type": {
+              "name": "STRING"
+            }
+          },
+          "name": "O_ORDERSTATUS",
+          "role": "DIMENSION",
+          "type": "DISCRETE",
+          "scale": "CATEGORICAL",
+          "source": "FIELD",
+          "alias": "O_ORDERSTATUS"
+        },
+        {
+          "formula": {
+            "source": "[O_TOTALPRICE]",
+            "type": {
+              "name": "FLOAT"
+            }
+          },
+          "name": "O_TOTALPRICE",
+          "role": "DIMENSION",
+          "type": "DISCRETE",
+          "scale": "CATEGORICAL",
+          "source": "FIELD",
+          "alias": "O_TOTALPRICE"
+        },
+        {
+          "formula": {
+            "source": "[O_ORDERDATE]",
+            "type": {
+              "unit": "MICROS",
+              "name": "TIMESTAMP"
+            }
+          },
+          "name": "O_ORDERDATE",
+          "role": "DIMENSION",
+          "type": "DISCRETE",
+          "scale": "CATEGORICAL",
+          "source": "FIELD",
+          "alias": "O_ORDERDATE"
+        },
+        {
+          "formula": {
+            "source": "[O_ORDERPRIORITY]",
+            "type": {
+              "name": "STRING"
+            }
+          },
+          "name": "O_ORDERPRIORITY",
+          "role": "DIMENSION",
+          "type": "DISCRETE",
+          "scale": "CATEGORICAL",
+          "source": "FIELD",
+          "alias": "O_ORDERPRIORITY"
+        },
+        {
+          "formula": {
+            "source": "[O_CLERK]",
+            "type": {
+              "name": "STRING"
+            }
+          },
+          "name": "O_CLERK",
+          "role": "DIMENSION",
+          "type": "DISCRETE",
+          "scale": "CATEGORICAL",
+          "source": "FIELD",
+          "alias": "O_CLERK"
+        },
+        {
+          "formula": {
+            "source": "[O_SHIPPRIORITY]",
+            "type": {
+              "name": "INTEGER"
+            }
+          },
+          "name": "O_SHIPPRIORITY",
+          "role": "DIMENSION",
+          "type": "DISCRETE",
+          "scale": "CATEGORICAL",
+          "source": "FIELD",
+          "alias": "O_SHIPPRIORITY"
+        },
+        {
+          "formula": {
+            "source": "[O_COMMENT]",
+            "type": {
+              "name": "STRING"
+            }
+          },
+          "name": "O_COMMENT",
+          "role": "DIMENSION",
+          "type": "DISCRETE",
+          "scale": "CATEGORICAL",
+          "source": "FIELD",
+          "alias": "O_COMMENT"
+        }
+      ],
+      "limit": 100,
+      "offset": 0,
+      "type": "TABLE"
+    }
+  ],
+  "type": "RECORDS"
+}
