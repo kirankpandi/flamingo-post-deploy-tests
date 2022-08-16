@@ -33,7 +33,7 @@ public class SignInLocal {
 
         ModeSessionFilter sessionFilter = new ModeSessionFilter();
         given().log().all().
-        given().filter(sessionFilter).filter(new ModeLoginFilter("kiran@modeanalytics.com", "Password123")).
+        given().filter(sessionFilter).filter(new ModeLoginFilter(System.getProperty("auth.key"), System.getProperty("auth.password"))).
         when().
                 get("/").
         then().
